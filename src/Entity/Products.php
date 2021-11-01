@@ -37,6 +37,12 @@ class Products
      */
     private $volume;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categories;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Products
     public function setVolume(float $volume): self
     {
         $this->volume = $volume;
+
+        return $this;
+    }
+
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }
