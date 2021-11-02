@@ -45,11 +45,11 @@ ul {
     flex-flow: row;
     margin: 0;
 }
-
+ul > li > a {
+    text-decoration: none;
+}
 li {
     list-style: none;
-    text-decoration: none;
-    text-decoration: none;
     color: black;
     padding: 2rem;
     transition: scale 1s;
@@ -61,8 +61,8 @@ li:hover {
 }
 
 .logo>img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
 }
 .card {
     max-width: 50%;

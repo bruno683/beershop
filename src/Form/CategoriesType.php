@@ -16,12 +16,6 @@ class CategoriesType extends AbstractType
         $builder
             ->add('Name', TextType::class, [
                 'label'=> 'Nom',
-                'choices'=> [
-                    'Blondes'=>'Blondes',
-                    'Malté'=>'Malté',
-                    'Brune'=>'Brunes',
-                    'Blanches'=>'blanches'
-                ]
             ])
             ->add('description', TextareaType::class)
         ;
