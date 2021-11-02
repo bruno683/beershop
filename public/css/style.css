@@ -38,9 +38,15 @@ ul {
 li {
     list-style: none;
     text-decoration: none;
+    text-decoration: none;
+    color: black;
     padding: 2rem;
-    
 }
+
+li:hover {
+    scale: 1.15;
+}
+
 .logo>img {
     width: 80px;
     height: 80px;
