@@ -15,11 +15,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="./../public/img/logo in taberna brasserie sansfond 01 HD.png" alt="Logo de la brasserie">
-            </div>
-        </nav>
+        {% include "navbar.html.twig" %}
         <div class="container">
         {% block body %}{% endblock %}
         </div>
