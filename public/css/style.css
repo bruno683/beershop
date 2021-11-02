@@ -4,12 +4,12 @@
 }
 
 html {
-    width: 100vh;
+    width: 100%;
     height: auto;
 }
 
 body {
-    width: 60%;
+    width: 100%;
     height: 100%;
 }
 
@@ -23,12 +23,23 @@ h1{
 
 .navbar {
     display: flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
+    width: 100%;
     justify-content: space-between;
+    background-color: burlywood;
 }
-ul>li {
+
+ul {
+    display: flex;
+    flex-flow: row;
+    margin: 0;
+}
+
+li {
+    list-style: none;
     text-decoration: none;
-    background-color: rgb(23, 145, 202, 0.60);
+    padding: 2rem;
+    
 }
 .logo>img {
     width: 80px;
