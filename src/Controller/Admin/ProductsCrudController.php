@@ -46,6 +46,7 @@ class ProductsCrudController extends AbstractCrudController
             Field::new('name'),
             Field::new('price'),
             Field::new('ingredients'),
+            AssociationField::new('images'),
             Field::new('volume'),
             AssociationField::new('categories'),
         ];
