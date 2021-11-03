@@ -5,11 +5,14 @@ namespace App\Entity;
 use App\Repository\ProductsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProductsRepository::class)
+ * @Vich\Uploadable
  */
 class Products
 {
@@ -46,16 +49,7 @@ class Products
      */
     private $categories;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="product")
-     */
-    private $images;
-
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -121,33 +115,5 @@ class Products
         return $this;
     }
 
-    /**
-     * @return Collection|Images[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Images $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Images $image): self
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }
