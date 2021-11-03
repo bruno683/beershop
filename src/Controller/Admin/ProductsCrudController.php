@@ -6,13 +6,13 @@ use App\Entity\Products;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductsCrudController extends AbstractCrudController
@@ -46,10 +46,10 @@ class ProductsCrudController extends AbstractCrudController
     {
         return [
             Field::new('name'),
-            Field::new('price'),
+            MoneyField::new('price')->setCurrency('EUR'),
             Field::new('ingredients'),
-            TextField::new('images')->setFormType(VichImageType::class)->onlyWhenCreating(),
-            ImageField::new('imageFile')->setBasePath('/uploads/images'),
+            TextField::new('image')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new('imageFile')->setBasePath('/upload/images')->onlyOnIndex(),
             Field::new('volume'),
             AssociationField::new('categories'),
         ];
