@@ -49,24 +49,26 @@ class Products
      */
     private $categories;
 
-   /**
-     * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
-     *
-     * @var EmbeddedFile
+  /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $image;
 
     /**
-     *@Vich\UploadableField(mapping="produits_images", fileNameProperty="image.name", size="image.size", mimeType="image.mimeType", originalName="image.originalName", dimensions="image.dimensions")
+     *@Vich\UploadableField(mapping="produits_images", fileNameProperty="image")
      *
-     * @var File|null
+     * @var File
      */
     private $imagesFiles;
 
-    public function __construct()
-    {
-        $this->image = new EmbeddedFile();
-    }
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    
 
     
     public function getId(): ?int
@@ -134,28 +136,33 @@ class Products
         return $this;
     }
 
-   /**
-     * 
-     *
-     * @param File|UploadedFile|null $imageFile
-     */
-    public function setImageFile(?File $imageFile = null)
+    public function setImageFile(File $image = null)
     {
-        $this->imageFile = $imageFile;
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
-    public function getImageFile(): ?File
+    public function getImageFile()
     {
         return $this->imageFile;
     }
 
-    public function setImage(EmbeddedFile $image): void
+    public function setImage($image)
     {
         $this->image = $image;
     }
 
-    public function getImage(): ?EmbeddedFile
+    public function getImage()
     {
         return $this->image;
     }
+
+   
 }
