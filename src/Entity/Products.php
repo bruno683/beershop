@@ -52,7 +52,8 @@ class Products
     private $file;
 
     /**
-    * @Vich\UploadableField(mapping="produits_images", fileNameProperty="file")
+    * @Vich\UploadableField(mapping="products", fileNameProperty="file")
+    * @ORM\Column(nullble=true)
     * @var File
     */
     private $imageFile;
