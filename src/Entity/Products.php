@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProductsRepository::class)
  * @Vich\Uploadable
  */
 class Products
@@ -47,26 +47,23 @@ class Products
     private $categories;
 
     /**
-     * Undocumented variable
-     * @Vich\UploadableField(mapping= "produits_images", fileNameProperty: "image")
-     * @var File
+     * @ORM\Column(type="string", length=255)
      */
-    private File $imageFile  ;
+    private $file;
 
     /**
-     * @ORM\Column(type = "string")
-     * @var string
-     */
-    private string $image ;
-   
+    * @Vich\UploadableField(mapping="produits_images", fileNameProperty="file")
+    * @var File
+    */
+    private $imageFile;
+
     /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTimeInterface|null
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $updatedAt = null;
+    private $createdAt;
 
     
-
+    
     
     public function getId(): ?int
     {
@@ -132,45 +129,43 @@ class Products
 
         return $this;
     }
-    
 
-    public function setImageFile(File $file): void
+    public function getFile(): ?string
     {
-        $this->imageFile = $file;
+        return $this->file;
+    }
 
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($file) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
+    public function setFile(string $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+    
+    public function setImageFile(File $file = null)
+    {
+        $this->imageFile=$file;
+
+        if($file){
+            $this->createdAt = new \DateTime('now');
         }
     }
 
-    public function getImageFile(): File
+    public function getImageFile()
     {
-        return $this->imageFile;
+        $this->imageFile;
     }
 
-    public function setImage(string $image): void
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        $this->image = $image;
+        return $this->createdAt;
     }
 
-    public function getImage(): string
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        return $this->image;
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
-   
-
-    /**
-     * Get the value of updatedAt
-     *
-     * @return ?\DateTimeInterface
-     */
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
 }
