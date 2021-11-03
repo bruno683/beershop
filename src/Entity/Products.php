@@ -53,7 +53,6 @@ class Products
 
     /**
     * @Vich\UploadableField(mapping="products", fileNameProperty="file")
-    * @ORM\Column(nullble=true)
     * @var File
     */
     private $imageFile;
@@ -154,7 +153,7 @@ class Products
 
     public function getImageFile()
     {
-        $this->imageFile;
+        return $this->imageFile;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
