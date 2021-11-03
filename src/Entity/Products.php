@@ -60,7 +60,7 @@ class Products
      *
      * @var File
      */
-    private $imagesFiles;
+    private $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
