@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ProductsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,6 +48,25 @@ class Products
      * @ORM\JoinColumn(nullable=false)
      */
     private $categories;
+
+   /**
+     * @ORM\Embedded(class="Vich\UploaderBundle\Entity\File")
+     *
+     * @var EmbeddedFile
+     */
+    private $image;
+
+    /**
+     *@Vich\UploadableField(mapping="produits_images", fileNameProperty="image.name")
+     *
+     * @var File|null
+     */
+    private $imagesFiles;
+
+    public function __construct()
+    {
+        $this->image = new EmbeddedFile();
+    }
 
     
     public function getId(): ?int
@@ -115,5 +134,28 @@ class Products
         return $this;
     }
 
-    
+   /**
+     * 
+     *
+     * @param File|UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(EmbeddedFile $image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?EmbeddedFile
+    {
+        return $this->image;
+    }
 }
