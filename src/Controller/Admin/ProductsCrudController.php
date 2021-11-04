@@ -50,7 +50,7 @@ class ProductsCrudController extends AbstractCrudController
             Field::new('ingredients'),
             Field::new('volume'),
             TextField::new('imageFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
-            ImageField::new('file')->setBasePath('products')->onlyOnIndex(),
+            ImageField::new('file')->setBasePath('upload/images')->onlyOnIndex(),
             AssociationField::new('categories'),
         ];
     }
