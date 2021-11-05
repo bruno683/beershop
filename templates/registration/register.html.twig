@@ -3,19 +3,36 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.dateOfBirth) }}
+<div class="card">
+    <div class="form" id="register">
+    <h1>Créer un compte</h1>
+    
+        {{ form_start(registrationForm) }} 
+        <p>Nom d'utilisateur</p>
+        {{ form_row(registrationForm.username) }} 
+        <p>Nom</p>
+        {{ form_row(registrationForm.lastName) }} 
+        <p>Prénom</p>
+        {{ form_row(registrationForm.firstName) }} 
+        <p>Adresse Email</p>
+        {{ form_row(registrationForm.email) }} 
+        <p>Date de naissance</p>
+        {{ form_row(registrationForm.dateOfBirth) }} 
+        <p>Mot de passe</p>
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            label: ' '
+        }) }} 
+        <p>J'accepte les termes</p>
+        {{ form_row(registrationForm.agreeTerms) }} 
 
-        <button type="submit" class="btn">Register</button>
+        <div class="btn">
+            <button type="submit" >Register</button>
+        </div>
+        
     {{ form_end(registrationForm) }}
+
+    </div>
+</div>
+    
+    
 {% endblock %}
