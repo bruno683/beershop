@@ -28,7 +28,9 @@ h1{
     height: 100vh;
     overflow-y: hidden;
 }
-
+button {
+    background-color: rgb(31, 194, 66);
+}
 .navbar {
     display: flex;
     flex-flow: row nowrap;
