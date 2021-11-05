@@ -30,6 +30,8 @@ h1{
 }
 button {
     background-color: rgb(31, 194, 66);
+    border: none;
+    box-shadow: rgba(10, 10, 10, 0.8);
 }
 .navbar {
     display: flex;
