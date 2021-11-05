@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" style="background-color: rgba(236, 231, 229, 0.65);">
     <div class="logo">
         <img src="{{ asset('img/logo in taberna brasserie sansfond 01 HD.png')}}" alt="Logo de la brasserie">
     </div>
@@ -6,5 +6,12 @@
         <li><a href="#">Accueil</a></li>
         <li><a href="#">Boutique</a></li>
         <li><a href="#">Contact</a></li>
+        {% if not is_granted('ROLE_CUSTOMER') %}
+            <li><a href="{{ path('app_register') }}"><button type="submit">Créer un compte</button></a></li>
+            <li><a href="{{ path('app_login') }}"><button type="submit">Connexion</button></a></li>
+        {% endif %}
+        {% if  is_granted('ROLE_CUSTOMER') %}
+            <li><a href="{{ path('app_logout') }}"><button type="submit">Deconnexion</button></a></li>
+        {% endif %}
     </ul>
 </nav>

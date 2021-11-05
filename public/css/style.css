@@ -23,7 +23,7 @@ h1{
 }
 
 .container {
-    background-color: rgb(212,106, 30, 0.65);
+    background-color: rgba(235, 231, 229, 0.65);
     width: auto;
     height: 100vh;
     overflow-y: hidden;
@@ -34,7 +34,7 @@ h1{
     flex-flow: row nowrap;
     width: 100%;
     justify-content: space-between;
-    background-color: rgb(231, 204, 168, 0.45);
+    background-color: rgba(238, 232, 225, 0.45);
     border-bottom: rgb(0, 0, 10);
     border-width: 5px;
     z-index: 1;
