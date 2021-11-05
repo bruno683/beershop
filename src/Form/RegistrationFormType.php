@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,12 +21,19 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
+            ->add('lastName', TextType::class, [
+                'label'=>'Nom',
+               
+            ])
+            ->add('firstName', TextType::class, [
+                'label'=>' Prénom',
+                
+
+            ])
+            ->add('email', EmailType::class)
+            ->add('dateOfBirth', BirthdayType::class, [
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -43,7 +53,15 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-        ;
+           
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les termes.',
+                    ]),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
