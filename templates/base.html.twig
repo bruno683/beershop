@@ -22,12 +22,13 @@
     <body>
         {% include "navbar.html.twig" %}
         {% include "header.html.twig" %}
-        {% if app.user %}
-        <div class="mb-3">
-           <p style="color: aliceblue;">Bonjour {{ app.user.username }}</p> 
-        </div>
-    {% endif %}
+        
         <div class="container" >
+            {% if app.user %}
+            <div class="mb-3">
+            <p style="color: rgb(32, 33, 34);">Bonjour {{ app.user.username }}</p> 
+            </div>
+        {% endif %}
             <div class="card">
                 {% block body %}{% endblock %}
             </div>

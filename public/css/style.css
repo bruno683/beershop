@@ -1,21 +1,25 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
    
 }
 
 html {
     width: 100%;
-    height: auto;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
     background-image: url(./../img/beers-g803d825c8_1920.jpg);
+    background-size: cover;
     background-position: bottom;
     background-attachment: fixed;
 }
 
 body {
     width: 100%;
-    height: 100%;
-    background-position: bottom;
-    background-size: cover;
+    height: 100vh;
+    margin: 0;
     position: absolute;
     z-index: -1;
 }
@@ -27,8 +31,7 @@ h1{
 .container {
     background-color: rgb(250, 250, 250);
     width: auto;
-    height: auto;
-    min-height: 50%;
+    min-height: 40%;
     overflow-y: hidden;
 }
 button {
@@ -56,12 +59,13 @@ button:hover {
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
+    height: 20%;
+    position: relative;
     font-family: Roboto;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(238, 232, 225, 0.45);
-    border-bottom: rgb(0, 0, 10);
-    border-width: 5px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0px 20px 30px rgba(252, 252, 252, 0.808)  ;
     z-index: 1;
 }
 
@@ -73,7 +77,7 @@ ul {
 ul > li > a {
     text-decoration: none;
     
-    color: rgb(13, 14, 13);
+    color: rgb(2, 2, 2);
     transition: all 0.3s ease 0s;
     border-radius: 0.5rem;
 }
@@ -82,7 +86,7 @@ ul > li > a:hover {
     transform: translateY(-0.8rem);
     background-color: rgba(159, 247, 203, 0);
     box-shadow: 0px 15px 20px rgba(43, 73, 61, 0.4);
-    color: rgb(59, 40, 16);
+    color: rgb(238, 137, 14);
 
 }
 li {
@@ -92,13 +96,10 @@ li {
     transition: scale 1s;
 }
 
-li:hover {
-    color: rgb(61, 129, 73);
-    scale: 2 0.7;
-}
+
 
 .logo>img {
-    width: 150px;
+    width:  150px;
     height: 150px;
 }
 .card {
@@ -123,20 +124,27 @@ li:hover {
 
 header {
     display: flex;
+    color: aliceblue;
+    font-family: Roboto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 30vh;
-    box-shadow: inset 0 0 0 2rem 5em rgb(92, 91, 91);
+    height: 30%;
+    box-shadow: inset 0px -35px 50px rgba(207, 203, 203, 0.8);
     z-index: 1;
 }
 
 footer {
     background-color: rgb(236, 208, 171);
     color: black;
+    height: 10%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
+}
+.copyright {
+    font-family: Roboto;
+    font-weight: 700;
 }
