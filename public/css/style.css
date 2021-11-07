@@ -174,3 +174,8 @@ footer {
     padding-top: 2rem;
     font-size: larger;
 }
+
+ table > a > button > .delete {
+    width: 3rem;
+    background-color: rgb(160, 10, 10);
+}

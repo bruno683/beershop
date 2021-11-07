@@ -4,72 +4,66 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\CartRepository;
+use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+
 class CartController extends AbstractController
 {
-    #[Route('/cart', name: 'cart')]
-    public function index(CartRepository $cartRepository): Response
+    /**
+     * @Route("cart", name = "cart")
+     *
+     * @param Request $request
+     * @param ProductsRepository $productRepo
+     * @return Response
+     */
+    public function index( Request $request, ProductsRepository $productRepo): Response
     {
-        $cart = $cartRepository->findOneBy(['user' => $this->getUser(),  'status' => 'active']);
+        $session = $request->getSession();
+        $cart = $session->get('panier', []);
 
+        $cartWithData = [];
+
+        foreach ($cart as $id => $quantity) {
+            $cartWithData[] = [
+                'produit' => $productRepo->find($id),
+                'quantity' => $quantity
+            ];
+        }
+
+      
         return $this->render('cart/index.html.twig', [
-            'cart' => $cart,
+            'items' => $cartWithData,
         ]);
     }
 
     /**
-     * @Route("/stripe/hook", name="stripe_hook")
+     * @Route("/cart/add/{id}", name = "cart_add")
      */
-    public function stripeHook(Request $request)
+    public function add($id, Request $request)
     {
-        $payload = $request->getContent();
-        file_put_contents(__DIR__ . '/hook.json', $payload);
-        return new Response('hihi');
+        $session = $request->getSession();
+        $panier = $session->get('panier', []);
+
+        if (!empty($panier[$id])) {
+            $panier[$id]++;
+        }else{
+            $panier[$id] = 1;
+        }
+
+
+        $session->set('panier', $panier);
+
+        return $this->redirectToRoute('cart');
     }
 
-    /**
-     * @Route("/stripe/create/session", name="stripe_create_session", methods={"POST"})
-     */
-    public function stripeCreateSession(CartRepository $cartRepository)
-    {
-        $cart = $cartRepository->findOneBy(['user' => $this->getUser(), 'status' => 'active']);
-        $secretKey = $_ENV['STRIPE_SECRET_KEY'];
-
-        \Stripe\Stripe::setApiKey($secretKey);
-
-        $checkout_session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => $cart->getStripeLineItems(),
-            'mode' => 'payment',
-            'success_url' => $this->generateUrl('cart_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('cart_canceled', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        ]);
-
-        return new JsonResponse(['id' => $checkout_session->id]);
-    }
-
-    /**
-     * @Route("/commande/validation", name="cart_success")
-     */
-    public function cartSuccess()
-    {
-        return new Response('yoouuuuuupppipiiiiii');
-    }
-
-    /**
-     * @Route("/commande/annulation", name="cart_canceled")
-     */
-    public function cartCancel()
-    {
-        return new Response('oh noooooooo');
-    }
-
+    
     
 
 }

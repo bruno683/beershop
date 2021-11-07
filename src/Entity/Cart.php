@@ -35,6 +35,11 @@ class Cart
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -123,5 +128,17 @@ class Cart
         }
 
         return $lineItems;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
     }
 }

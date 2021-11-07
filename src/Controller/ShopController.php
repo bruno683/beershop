@@ -13,6 +13,8 @@ class ShopController extends AbstractController
     public function index(ProductsRepository $productsRepository): Response
     {
         $items = $productsRepository->findAll(); 
+        
+
         return $this->render('shop/index.html.twig', [
             'title' => 'Notre catalogue',
             'items' => $items

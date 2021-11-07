@@ -46,7 +46,7 @@ class ProductsCrudController extends AbstractCrudController
     {
         return [
             Field::new('name'),
-            MoneyField::new('price')->setCurrency('EUR'),
+            MoneyField::new('price')->setCurrency('EUR')->set,
             Field::new('ingredients'),
             Field::new('volume'),
             TextField::new('imageFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
