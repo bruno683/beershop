@@ -4,7 +4,7 @@
     </div>
     <ul>
         <li><a href="#">Accueil</a></li>
-        <li><a href="#">Boutique</a></li>
+        <li><a href=" {{ path('shop')}} ">Boutique</a></li>
         <li><a href="#">Contact</a></li>
         {% if not is_granted('ROLE_CUSTOMER') %}
             <li><a href="{{ path('app_register') }}"><button type="submit">Créer un compte</button></a></li>

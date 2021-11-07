@@ -148,3 +148,13 @@ footer {
     font-family: Roboto;
     font-weight: 700;
 }
+
+.shop_container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto;
+    padding: 1rem;
+    background-color: antiquewhite;
+    border-radius: 2rem;
+}
+
