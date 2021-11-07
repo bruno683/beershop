@@ -37,7 +37,7 @@ h1{
 button {
     background-color: rgb(34, 163, 62);
     color: azure;
-    min-width: 10rem;
+    width: fit-content;
     border: none;
     box-shadow: 0px 1rem 1.5rem rgb(83, 82, 82);
     border-radius: 0.5rem;
@@ -175,7 +175,29 @@ footer {
     font-size: larger;
 }
 
- table > a > button > .delete {
-    width: 3rem;
+a button.delete {
+    width: 2rem;
     background-color: rgb(160, 10, 10);
+}
+
+a button.delete:hover {
+    background-color: rgb(224, 16, 16);
+}
+table {
+    max-width: fit-content;
+    border-collapse: collapse;
+    margin: auto;
+}
+table thead {
+    background-color: rgb(87, 87, 87, 0.60);
+    color: antiquewhite;
+    border: 3px solid rgb(71, 71, 71, 0.60);
+}
+table thead th {
+    padding: 1.5rem;
+}
+table td {
+    border: 3px solid rgb(71, 71, 71, 0.60);
+    text-align: center;
+    
 }
