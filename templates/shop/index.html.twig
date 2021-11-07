@@ -12,7 +12,10 @@
             {{item.ingredients}}
             {{item.volume}}
             <small>{{item.categories}}</small>
-            {{item.price}}
+            <p class="price">{{item.price}}</p> 
+            <div class="btn">
+                <button type = "submit" style="background-color: rgb(0, 110, 255); width: 25px;">Ajouter au panier</button>
+            </div>
         </div>
         
     {% endfor %} 
