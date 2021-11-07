@@ -30,6 +30,11 @@ class Cart
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -74,5 +79,49 @@ class Cart
         $this->products->removeElement($product);
 
         return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getTotal(): int
+    {
+        $total = 0;
+        foreach($this->getProducts() as $product){
+            $total += $product->getPrice();
+        }
+        return $total;
+    }
+
+    public function getStripeLineItems()
+    {
+        $lineItems = [];
+
+        foreach($this->getProducts() as $product){
+
+            $line = [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'unit_amount' => $product->getPrice(),
+                        'product_data' => [
+                            'name' => $product->getName(),
+                        ],
+                    ],
+                    'quantity' => 1,
+                ];
+
+            $lineItems[] = $line;
+        }
+
+        return $lineItems;
     }
 }

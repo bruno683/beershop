@@ -3,26 +3,23 @@
 {% block title %}La boutique{% endblock %}
 
 {% block body %}
+<h1>{{title}}</h1>
 <div class="shop_container">
-    <h1>{{title}}</h1>
+    
      {% for item in items %}
-        <div class="card">
+        <div class="card-product">
             <h2>{{item.name}}</h2>  
-            <img src="{{ asset('/upload/images/' ~ item.file)}}" alt="photo produit" width="150" height="210">
-            {{item.ingredients}}
-            {{item.volume}}
+            <img src="{{ asset('/upload/images/' ~ item.file)}}" alt="photo produit" width="150" height="250">
+            <p>{{item.ingredients}}</p>
+             <p>{{item.volume}}</p>
             <small>{{item.categories}}</small>
-            <p class="price">{{item.price}}</p> 
+            <p class="price">{{(item.price)/ 100 }} €</p> 
             <div class="btn">
-                <button type = "submit" style="background-color: rgb(0, 110, 255); width: 25px;">Ajouter au panier</button>
+                <a href=" {{ path('cart')}} "><button type = "submit" style="background-color: rgb(0, 110, 255); width: 25px;">Ajouter au panier</button></a>
             </div>
         </div>
         
     {% endfor %} 
 </div>
-    
-    
-  
-
 
 {% endblock %}

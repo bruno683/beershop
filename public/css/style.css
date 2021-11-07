@@ -153,17 +153,24 @@ footer {
     display: flex;
     flex-flow: row wrap;
     margin: auto;
+    max-width: 60%;
     padding: 1rem;
     background-color: antiquewhite;
     border-radius: 2rem;
 }
 
-.shop_container.card{
-    display: block;
+.card-product{
     font-family: Roboto;
-    justify-content: space-around;
+    padding: 1rem;
+    margin-left: 2rem;
+    background-color: aliceblue;
+    border-radius: 2rem;
+    width: fit-content;
 }
-.shop_container.card.price {
-    font-weight: 900;
+
+.card-product > .price {
+    font-family: Lato;
+    font-weight: 700;
+    padding-top: 2rem;
     font-size: larger;
 }

@@ -3,7 +3,7 @@
         <img src="{{ asset('img/logo in taberna brasserie sansfond 01 HD.png')}}" alt="Logo de la brasserie">
     </div>
     <ul>
-        <li><a href="#">Accueil</a></li>
+        <li><a href="{{ path('home_page')}}">Accueil</a></li>
         <li><a href=" {{ path('shop')}} ">Boutique</a></li>
         <li><a href="#">Contact</a></li>
         {% if not is_granted('ROLE_CUSTOMER') %}

@@ -10,6 +10,32 @@
 
 <div class="example-wrapper">
     <h1>Panier</h1>
+    <section>
+        <h2>Mon panier</h2>
+        <table class="table">
+            <thead>
+                <tr class="table-active">
+                    <td>Produit</td>
+                    <td>Prix</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in cart.products %}
+                <tr>
+                    <td>{{ product.name|capitalize }}</td>
+                    <td>{{ product.price/100 }} €</td>
+                </tr>
+            {% endfor %}
+            <tr class="table-active">
+                <td>Total à payer</td>
+                <td>{{ cart.total/100 }} €</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <button id="checkout-button" class="btn btn-primary">Valider mon panier</button>
+        </div>
+    </section>
 
    
 </div>
