@@ -36,6 +36,11 @@
                     <td  colspan="4" style="text-align: right;"> Total: </td>
                     <td > {{total}}</td>
                     <td></td>
+                    <td>
+                        <form action="{{ path('payment')}}" method="post">
+                            <button>Valider</button>
+                        </form>
+                    </td>
                 </tr>
             </tfoot>
         </table>
