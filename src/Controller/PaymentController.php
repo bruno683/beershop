@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PaymentController extends AbstractController
 {
@@ -42,7 +42,7 @@ class PaymentController extends AbstractController
     /**
      * @Route("/checkout", name = "payment_checkout")
      */
-    public function checkout(Request $request, ProductsRepository $productRepo, $stripeSk)
+    public function checkout(Request $request, ProductsRepository $productRepo, $stripeSk): Response
     {
         $session = $request->getSession();
         $cart = $session->get('panier', []);
@@ -77,10 +77,26 @@ class PaymentController extends AbstractController
               'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => 'https://example.com/success',
-            'cancel_url' => 'https://example.com/cancel',
+            'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
           ]);
 
-          dd($stripeSession);
+          return $this->redirect($stripeSession->url, 303);
+    }
+
+    /**
+     * @Route("/success-url", name="successurl")
+     */
+    public function successUrl()
+    {
+        return $this->render('payment/success.html.twig');
+    }
+    
+    /**
+     * @Route("/cancel-url", name="cancelurl")
+     */
+    public function cancelUrl()
+    {
+        return $this->render('payment/cancel.html.twig');
     }
 }
