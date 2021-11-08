@@ -36,14 +36,13 @@
                     <td  colspan="4" style="text-align: right;"> Total: </td>
                     <td > {{total}}</td>
                     <td></td>
-                    <td>
-                        <form action="{{ path('payment')}}" method="post">
-                            <button>Valider</button>
-                        </form>
-                    </td>
                 </tr>
             </tfoot>
         </table>
+        <form action=" {{ path('payment_checkout')}}" method="POST">
+            <button type="submit">Confirmer</button>
+        </form>
+        
     {% else %}
         <p>Votre panier est vide</p>
     {% endif %}
