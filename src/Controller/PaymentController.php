@@ -85,15 +85,15 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/success-url", name="successurl")
+     * @Route("/success-url", name="success_url")
      */
     public function successUrl()
     {
         return $this->render('payment/success.html.twig');
     }
-    
+
     /**
-     * @Route("/cancel-url", name="cancelurl")
+     * @Route("/cancel-url", name="cancel_url")
      */
     public function cancelUrl()
     {
