@@ -42,7 +42,7 @@ class PaymentController extends AbstractController
     /**
      * @Route("/checkout", name = "payment_checkout")
      */
-    public function checkout(Request $request, ProductsRepository $productRepo)
+    public function checkout(Request $request, ProductsRepository $productRepo, $stripeSk)
     {
         $session = $request->getSession();
         $cart = $session->get('panier', []);
@@ -62,7 +62,7 @@ class PaymentController extends AbstractController
             $total += $totalItem;
         }
         
-        \Stripe\Stripe::setApiKey('sk_test_51Js7GtL81yHRap8c46xs7Iu5XyBO4TRb7jxByndtFXLQvYCG6INLc3Ixlz3U0QCojWIp2gnoCoaf26hTyo7ejE4V00X29Wt8EO');
+        \Stripe\Stripe::setApiKey($stripeSk);
 
         $stripeSession = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -70,9 +70,9 @@ class PaymentController extends AbstractController
               'price_data' => [
                 'currency' => 'eur',
                 'product_data' => [
-                  'name' => 'T-shirt',
+                  'name' => 'Bouteilles de Biéres',
                 ],
-                'unit_amount' => $total,
+                'unit_amount' => $total*100,
               ],
               'quantity' => 1,
             ]],
