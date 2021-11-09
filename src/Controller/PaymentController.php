@@ -87,16 +87,23 @@ class PaymentController extends AbstractController
     /**
      * @Route("/success-url", name="success_url")
      */
-    public function successUrl()
+    public function successUrl(Request $request): Response
     {
+        $session = $request->getSession();
+        $session->set('panier', []);
+   
+
         return $this->render('payment/success.html.twig');
     }
 
     /**
      * @Route("/cancel-url", name="cancel_url")
      */
-    public function cancelUrl()
+    public function cancelUrl(Request $request)
     {
+        $session = $request->getSession();
+        $session->set('panier', []);
+        
         return $this->render('payment/cancel.html.twig');
     }
 }
