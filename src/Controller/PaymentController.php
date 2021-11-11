@@ -68,7 +68,10 @@ class PaymentController extends AbstractController
             'amount' => $total * 100,
             'currency' => 'eur',
             'payment_method_types' => ['card'],
+          ], [
+            'idempotency_key' => 'YNMMUyOpgUqhwE57'
           ]);
+         
 
         $stripeSession = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
