@@ -62,19 +62,20 @@ class PaymentController extends AbstractController
             $total += $totalItem;
         }
         
-        \Stripe\Stripe::setApiKey($stripeSk);
+        $stripe = new \Stripe\StripeClient($stripeSk);
 
-        \Stripe\PaymentIntent::create([
+        $stripe->paymentIntents->create([
             'amount' => $total * 100,
             'currency' => 'eur',
             'payment_method_types' => ['card'],
           ], [
-            'idempotency_key' => 'YNMMUyOpgUqhwE57'
+            'idempotency_key' => 'YN8659yOpgUqhwE57'
           ]);
          
 
-        $stripeSession = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
+        $stripeSession = $stripe->checkout->sessions->create(
+            [
+                'payment_method_types' => ['card'],
             'line_items' => [[
               'price_data' => [
                 'currency' => 'eur',
@@ -88,7 +89,10 @@ class PaymentController extends AbstractController
             'mode' => 'payment',
             'success_url' => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-          ]);
+            ]
+            );
+            
+         
 
           return $this->redirect($stripeSession->url, 303);
     }
