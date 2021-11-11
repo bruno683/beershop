@@ -64,6 +64,12 @@ class PaymentController extends AbstractController
         
         \Stripe\Stripe::setApiKey($stripeSk);
 
+        \Stripe\PaymentIntent::create([
+            'amount' => $total * 100,
+            'currency' => 'eur',
+            'payment_method_types' => ['card'],
+          ]);
+
         $stripeSession = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
